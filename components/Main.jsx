@@ -22,13 +22,13 @@ export function Main() {
   return (
     <View style={{ flex: 1 }}>
       {/* HEADER */}
-      <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
+      {/* <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
         <Image source={images.logo} style={styles.logo} />
         <Text style={styles.title}>Equipo Basket</Text>
         <Link href="/about" style={{ color: "white", marginTop: 10 }}>
           Ir al About
         </Link>
-      </View>
+      </View> */}
 
       {/* CONTENIDO */}
       {players.length === 0 ? (
