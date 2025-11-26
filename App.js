@@ -1,40 +1,31 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, ImageBackground, View } from 'react-native';
-import { Player } from './components/Player';
-import { images } from './assets/images/images';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { getPlayers } from './service/players';
+// Importa tus pantallas
+import HomeScreen from './screens/HomeScreen';
+import PlayerDetail from './screens/playerDetail';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [players, setPlayers] = useState([]);
-
-  useEffect(() => {
-    const load = async () => {
-      const data = await getPlayers();
-      setPlayers(data);
-    };
-
-    load();
-  }, []);
-
   return (
-    <ImageBackground
-      source={images.background}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <FlatList
-        data={players}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Player item={item} />}
-        contentContainerStyle={{ paddingVertical: 50 }}
-      />
-    </ImageBackground>
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* Pantalla principal con la lista de jugadores */}
+        <Stack.Screen 
+          name="Inicio" 
+          component={HomeScreen} 
+          options={{ title: 'Jugadores de Basket 🏀' }}
+        />
+
+        {/* Pantalla de detalle con datos + vídeo */}
+        <Stack.Screen 
+          name="Detalle" 
+          component={PlayerDetail} 
+          options={{ title: 'Detalle del Jugador' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-});
