@@ -29,7 +29,7 @@ export default function HomeScreen({ navigation }) { // Recibimos 'navigation'
             // 'Detail' es el nombre que le pusimos en App.js
             // Pasamos un objeto con el ID del jugador para usarlo después
             <TouchableOpacity 
-              onPress={() => navigation.navigate('Detail', { playerId: item.id })}
+              onPress={() => navigation.navigate('Detail', { player: item })}
             >
               <Player item={item} />
             </TouchableOpacity>
