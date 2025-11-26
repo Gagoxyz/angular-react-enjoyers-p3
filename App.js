@@ -1,40 +1,45 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, ImageBackground, View } from 'react-native';
-import { Player } from './components/Player';
-import { images } from './assets/images/images';
+import 'react-native-gesture-handler'; // Importante que vaya primero
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { getPlayers } from './service/players';
+// Importamos las pantallas
+import HomeScreen from './src/screens/HomeScreen';
+import DetailScreen from './src/screens/DetailScreen';
+import MultimediaScreen from './src/screens/MultimediaScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [players, setPlayers] = useState([]);
-
-  useEffect(() => {
-    const load = async () => {
-      const data = await getPlayers();
-      setPlayers(data);
-    };
-
-    load();
-  }, []);
-
   return (
-    <ImageBackground
-      source={images.background}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <FlatList
-        data={players}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Player item={item} />}
-        contentContainerStyle={{ paddingVertical: 50 }}
-      />
-    </ImageBackground>
+    <NavigationContainer>
+      <Stack.Navigator 
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#f4511e', // Color de ejemplo (puedes poner el de tu equipo)
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ title: 'Listado de Jugadores' }} 
+        />
+        <Stack.Screen 
+          name="Detail" 
+          component={DetailScreen} 
+          options={{ title: 'Detalle del Jugador' }}
+        />
+        <Stack.Screen 
+          name="Multimedia" 
+          component={MultimediaScreen} 
+          options={{ title: 'Multimedia' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-});
