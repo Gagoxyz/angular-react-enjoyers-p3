@@ -17,3 +17,17 @@ export const getPlayers = async () => {
         return [];
     }
 };
+
+import { doc, getDoc } from 'firebase/firestore';
+
+export const getPlayerById = async (id) => {
+    try {
+        const docRef = doc(db, 'players', id);
+        const snap = await getDoc(docRef);
+        if (snap.exists()) return { id: snap.id, ...snap.data() };
+        return null;
+    } catch (error) {
+        console.error('Error al obtener jugador por id:', error);
+        return null;
+    }
+};
