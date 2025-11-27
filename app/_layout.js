@@ -1,6 +1,6 @@
 import { Stack, Link, useRouter, useSegments } from "expo-router";
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
-import { Image, ImageBackground, StyleSheet, Text, View, Pressable } from "react-native";
+import { Image, ImageBackground, StyleSheet, View, Pressable } from "react-native";
 import { images } from "../assets/images/images";
 
 import Ionicons from '@expo/vector-icons/Ionicons';
