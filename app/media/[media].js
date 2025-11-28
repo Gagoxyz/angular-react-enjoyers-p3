@@ -1,13 +1,13 @@
 import { useLocalSearchParams } from "expo-router";
-import { Detail } from "../components/Detail";
+import { Media } from "../../components/Media";
 import { ScrollView } from "react-native";
 
-export default function DetailPage() {
-    const { id } = useLocalSearchParams();
+export default function MediaPage() {
+    const { media } = useLocalSearchParams();
 
     return (
         <ScrollView style={{ flex: 1 }}>
-            <Detail id={id} />
+            <Media youtubeId={media} />
         </ScrollView>
     );
 }

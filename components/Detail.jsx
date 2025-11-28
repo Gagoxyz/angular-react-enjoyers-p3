@@ -1,12 +1,14 @@
-import { View, Text, Image, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, Modal, TouchableOpacity, Pressable } from "react-native";
 import { getPlayers } from "../service/players";
 import { useEffect, useState } from "react";
+import { Link } from "expo-router";
 
 
 export function Detail({ id }) {
     const [player, setPlayer] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState("");
+
 
     useEffect(() => {
         const load = async () => {
@@ -73,6 +75,11 @@ export function Detail({ id }) {
 
                 <Text style={styles.label}>Información:</Text>
                 <Text style={styles.info}>{player.info}</Text>
+                <Link href={`/media/${player.youtubeId}`} asChild>
+                    <Pressable>
+                        <Text style={styles.multimedia}>Acceso multimedia</Text>
+                    </Pressable>
+                </Link>
             </View>
         </View>
     );
@@ -117,6 +124,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "#0F2537",
         fontWeight: "bold",
+    },
+    multimedia: {
+        fontSize: 18,
+        color: "#0F2537",
+        fontWeight: "bold",
+        alignContent: "center"
     },
     value: {
         fontSize: 18,

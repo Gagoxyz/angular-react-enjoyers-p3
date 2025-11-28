@@ -1,21 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { getPlayers } from "../service/players";
 
-export function Media({ id }) {
-  const [player, setPlayer] = useState(null);
+export function Media({ youtubeId }) {
   const playerRef = useRef(null);
-
-  useEffect(() => {
-    const load = async () => {
-      const players = await getPlayers();
-      const p = players.find((pl) => pl.id === id);
-      setPlayer(p);
-    };
-    load();
-  }, [id]);
 
   // Rewind 15s
   const rewind = useCallback(async () => {
@@ -40,16 +29,13 @@ export function Media({ id }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.label}>
-          {player ? `Vídeo de ${player.nombre} ${player.apellidos}` : "Cargando..."}
-        </Text>
+        <Text style={styles.label}>Vídeo de YouTube</Text>
 
-        {player && (
           <YoutubePlayer
             ref={playerRef}
             height={240}
             width="100%"
-            videoId={player.youtubeId}
+            videoId={youtubeId}
             webViewStyle={{ opacity: 0.99 }}
             initialPlayerParams={{
               controls: true, // dejamos que el propio player maneje Play/Pause
@@ -57,7 +43,6 @@ export function Media({ id }) {
               rel: false,
             }}
           />
-        )}
 
         <View style={styles.controls}>
           <TouchableOpacity onPress={rewind} style={styles.iconBtn}>
