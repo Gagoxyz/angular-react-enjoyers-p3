@@ -76,8 +76,8 @@ export function Detail({ id }) {
                 <Text style={styles.label}>Información:</Text>
                 <Text style={styles.info}>{player.info}</Text>
                 <Link href={`/media/${player.youtubeId}`} asChild>
-                    <Pressable>
-                        <Text style={styles.multimedia}>Acceso multimedia</Text>
+                    <Pressable style={styles.button}>
+                        <Text style={styles.buttonText}>Ver multimedia</Text>
                     </Pressable>
                 </Link>
             </View>
@@ -125,12 +125,6 @@ const styles = StyleSheet.create({
         color: "#0F2537",
         fontWeight: "bold",
     },
-    multimedia: {
-        fontSize: 18,
-        color: "#0F2537",
-        fontWeight: "bold",
-        alignContent: "center"
-    },
     value: {
         fontSize: 18,
         color: "#0F2537",
@@ -168,5 +162,23 @@ const styles = StyleSheet.create({
         width: "90%",
         height: "80%",
         borderRadius: 10,
+    },
+    button: {
+        backgroundColor: "#0F2537",
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 12,
+        alignItems: "center",
+        marginTop: 24,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.25,
+        shadowRadius: 6,
+        elevation: 6,
+    },
+    buttonText: {
+        color: "#FFF",
+        fontSize: 18,
+        fontWeight: "bold",
     },
 });
