@@ -5,6 +5,9 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
+// Importa tu PlayersProvider
+import { PlayersProvider } from '../src/context/PlayersContext';
+
 export const unstable_settings = {
   anchor: '(tabs)',
 };
@@ -14,11 +17,16 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
+      
+      {/* Aquí envolvemos TODO con PlayersProvider */}
+      <PlayersProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </PlayersProvider>
+      
     </ThemeProvider>
   );
 }
